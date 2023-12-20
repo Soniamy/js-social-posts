@@ -150,11 +150,25 @@ $likeBtnElements.forEach((likeBtnElement, index) => {
 
   likeBtnElement.addEventListener('click', (event) => {
     event.preventDefault();
+    let likesCounter = posts[index]['likes'];
 
     if (!likePut) {
       likeBtnElement.classList.add('like-button--liked');
+      likesCounter++;
+      $likesCounterElements[index].innerHTML = likesCounter;
+      const likedPostId = posts[index]['id'];
+      likedPosts.push(likedPostId);
+      likePut = true;
+      console.log(likedPosts);
     } else {
       likeBtnElement.classList.remove('like-button--liked');
+      $likesCounterElements[index].innerHTML = likesCounter;
+      const likedPostId = posts[index]['id'];
+      likedPosts = likedPosts.filter((likedPost) => {
+        return likedPost != likedPostId;
+      });
+      likePut = false;
+      console.log(likedPosts);
     }
   });
 });
