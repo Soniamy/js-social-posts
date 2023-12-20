@@ -70,11 +70,11 @@ let likedPosts = [];
            CREAZIONE POST DELLA PAGINA
 ----------------------------------------------------------------------*/
 
-const postContainer = document.querySelector('#container');
+const $postContainer = document.querySelector('#container');
 posts.forEach((post) => {
   // * Creazione degli elementi HTML
 
-  const postElement = getAnElementWithClasses(
+  const $postElement = getAnElementWithClasses(
     'article',
     'post'
   ); /*metodo per ottenere elementi in base a più nomi di classi.*/
@@ -88,7 +88,7 @@ posts.forEach((post) => {
   /*----------------------------------------------------------------------
            MODIFICA DEL CONTENUTP HTML
    ----------------------------------------------------------------------*/
-  postElement.innerHTML = `
+  $postElement.innerHTML = `
    <div class="post__header">
             <div class="post-meta">                    
                 <div class="post-meta__icon">
@@ -122,7 +122,7 @@ posts.forEach((post) => {
         </div>            
     `;
 
-  postContainer.append(postElement);
+  $postContainer.append($postElement);
 });
 
 function getAnElementWithClasses(element, ...elementClasses) {
@@ -134,3 +134,27 @@ function getAnElementWithClasses(element, ...elementClasses) {
 
   return htmlElement;
 }
+/*------------------------------------------------------------
+           CREAZIONE DI ARREY 
+   -----------------------------------------------------------*/
+const $postElements = document.querySelectorAll('.post');
+const $likeBtnElements = document.querySelectorAll('.post .js-like-button');
+const $likesCounterElements = document.querySelectorAll(
+  '.post .js-likes-counter'
+);
+/*------------------------------------------------------------
+             FUNZIONI
+   -----------------------------------------------------------*/
+$likeBtnElements.forEach((likeBtnElement, index) => {
+  let likePut = false;
+
+  likeBtnElement.addEventListener('click', (event) => {
+    event.preventDefault();
+
+    if (!likePut) {
+      likeBtnElement.classList.add('like-button--liked');
+    } else {
+      likeBtnElement.classList.remove('like-button--liked');
+    }
+  });
+});
